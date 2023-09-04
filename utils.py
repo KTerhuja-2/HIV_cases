@@ -33,10 +33,10 @@ def predict(df,country,steps):
         columns=y.columns,
     )
     
-    pred_df = pd.DataFrame(columns=["Year"],index=y_pred.index.union(y.index))
+    pred_df = pd.DataFrame(columns=[country],index=y_pred.index.union(y.index))
     
-    pred_df.loc[y_pred.index,"Year"] = y_pred.values.reshape(1,-1)
-    pred_df.loc[y_fit.index,"Year"] = y_fit.values.reshape(1,-1)
+    pred_df.loc[y_pred.index,country] = y_pred.values.reshape(1,-1)
+    pred_df.loc[y_fit.index,country] = y_fit.values.reshape(1,-1)
     
     return pred_df
 
