@@ -18,7 +18,7 @@ country_list = [
 
 
 
-l,c,r = st.columns([1,2,1])
+l,c,r = st.columns([1,2,2])
 country_name = l.selectbox("Country",sorted(set(country_list).intersection(df.columns)))
 input_years = c.slider("Forecast Period (in Years)",1,10)
 
@@ -48,7 +48,8 @@ fig2 = px.choropleth(map_df, locations=map_df.index,locationmode="country names"
                     color=2022, # lifeExp is a column of gapminder
                     hover_name=map_df.index, # column to add to hover information
                     color_continuous_scale=px.colors.sequential.Burg,
-                    scope="africa"
+                    scope="africa",
+                    height=600
 )
 fig2.update_geos(
     bgcolor="rgb(14,17,23)",
