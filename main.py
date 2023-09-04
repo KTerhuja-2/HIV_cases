@@ -33,8 +33,7 @@ fig.update_layout(
     xaxis_title="Year", yaxis_title="New HIV Population"
 )
 
-r.plotly_chart(fig)
+r.plotly_chart(fig,use_container_width=True)
 show_df = pred_df.copy().reset_index().rename(columns={"index":"Year",country_name:"New HIV Population"})
 show_df[["Year","New HIV Population"]] = show_df[["Year","New HIV Population"]].astype("int")
-show_df = show_df.style.format({"New HIV Population": lambda x : '{:.4f}'.format(x)})
-l.dataframe(show_df)
+l.dataframe(show_df,use_container_width=True)
