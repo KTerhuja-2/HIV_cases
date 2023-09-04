@@ -6,7 +6,7 @@ import utils
 
 st.set_page_config(page_title="HIV Cases",layout="wide")
 
-st.title("New HIV Cases Forecast")
+st.title("New HIV Cases Forecast in Africa")
 
 df = pd.read_csv("HIV_data 1990-2022.csv",index_col=0).dropna(axis=1)
 country_list = [
