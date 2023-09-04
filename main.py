@@ -57,7 +57,7 @@ fig2 = px.choropleth(
     color_continuous_scale=px.colors.sequential.amp,
     # color_continuous_scale=px.colors.diverging.balance,
     scope="africa",
-    title=f"New HIV Population in {country_name}",
+    title=f"New HIV Population in year {input_years}",
     height=600
     )
 fig2.update_geos(
