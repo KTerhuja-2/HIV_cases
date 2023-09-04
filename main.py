@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import utils
 
-df = pd.read_csv("HIV_data 1990-2022.csv",index_col=0)
+df = pd.read_csv("HIV_data 1990-2022.csv",index_col=0).dropna()
 country_list = [
     'Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cameroon', 
     'Central African Republic', 'Chad', 'Comoros', 'Congo', "Côte d'Ivoire", 
@@ -14,7 +14,7 @@ country_list = [
     'South Africa', 'South Sudan', 'Sudan', 'Tanzania', 'Togo', 'Tunisia', 'Uganda', 'Zambia', 'Zimbabwe'
 ]
 
-country_name = st.selectbox("Country",country_list)
+country_name = st.selectbox("Country",set(country_list).intersection(df.columns))
 input_years = st.slider("Forecast Period (in Years)",1,10)
 
 fit_df,pred_df = utils.predict(df,country_name,input_years)
