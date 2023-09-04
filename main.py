@@ -14,7 +14,7 @@ country_list = [
     'South Africa', 'South Sudan', 'Sudan', 'Tanzania', 'Togo', 'Tunisia', 'Uganda', 'Zambia', 'Zimbabwe'
 ]
 
-country_name = st.selectbox("Country",set(country_list).intersection(df.columns))
+country_name = st.selectbox("Country",sorted(set(country_list).intersection(df.columns)))
 input_years = st.slider("Forecast Period (in Years)",1,10)
 
 fit_df,pred_df = utils.predict(df,country_name,input_years)
