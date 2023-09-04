@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 import utils
 
 st.set_page_config(layout="wide")
@@ -50,8 +51,18 @@ l.dataframe(show_df.style.format(thousands=''),use_container_width=True)
 map_df = pd.read_csv("HIV_data 1990-2032.csv",index_col=0).dropna(axis=1)
 map_df = map_df[sorted(set(country_list).intersection(df.columns))].transpose()[[input_years]].copy()
 map_df["ISO"] = utils.country_iso_alpha3
-fig2 = px.choropleth(
-    map_df, 
+# fig2 = px.choropleth(
+#     map_df, 
+#     locations="ISO",
+#     color=input_years,
+#     hover_name=map_df.index,
+#     color_continuous_scale=px.colors.sequential.amp,
+#     # color_continuous_scale=px.colors.diverging.balance,
+#     scope="africa",
+#     title=f"New HIV Population in year {input_years}",
+#     height=600
+#     )
+fig2 = go.Figure(data=go.Choropleth(map_df, 
     locations="ISO",
     color=input_years,
     hover_name=map_df.index,
@@ -60,7 +71,7 @@ fig2 = px.choropleth(
     scope="africa",
     title=f"New HIV Population in year {input_years}",
     height=600
-    )
+    ))
 fig2.update_geos(
     bgcolor="rgb(14,17,23)",
     showcoastlines=False,
