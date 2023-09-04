@@ -51,7 +51,7 @@ fig2 = px.choropleth(map_df, locations="ISO",
                     scope="africa")
 fig2.update_geos(
     showcoastlines=True, coastlinecolor="rgb(150,150,150)",
-    showland=True, landcolor="rgb(14,17,23)",
+    showland=False, landcolor="rgb(14,17,23)",
     showocean=True, oceancolor="rgb(14,17,23)",
     showlakes=False, lakecolor="Blue",
     showrivers=False, rivercolor="Blue"
