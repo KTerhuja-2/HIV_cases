@@ -4,7 +4,15 @@ import plotly.express as px
 import utils
 
 df = pd.read_csv("HIV_data 1990-2022.csv",index_col=0)
-country_list = df.columns
+country_list = [
+    'Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cameroon', 
+    'Central African Republic', 'Chad', 'Comoros', 'Congo', "Côte d'Ivoire", 
+    'Democratic Republic of the Congo', 'Djibouti', 'Egypt', 'Equatorial Guinea', 'Eritrea', 
+    'Eswatini', 'Ethiopia', 'Gabon', 'Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau', 'Kenya', 'Lesotho', 
+    'Liberia', 'Libya', 'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Morocco', 'Mozambique', 
+    'Namibia', 'Niger', 'Nigeria', 'Rwanda', 'Sao Tome and Principe', 'Senegal', 'Sierra Leone', 'Somalia', 
+    'South Africa', 'South Sudan', 'Sudan', 'Tanzania', 'Togo', 'Tunisia', 'Uganda', 'Zambia', 'Zimbabwe'
+]
 country_name = st.selectbox("Country",country_list)
 input_years = st.slider("Forecast Period",1,10)
 # st.dataframe(df[[country_name]])
