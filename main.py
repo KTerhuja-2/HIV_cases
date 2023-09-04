@@ -48,9 +48,9 @@ map_df = pd.read_csv("HIV_data 1990-2032.csv",index_col=0).dropna(axis=1).transp
 st.dataframe(map_df)
 map_df = df[sorted(set(country_list).intersection(df.columns))].transpose()[[input_years]].copy()
 map_df["ISO"] = utils.country_iso_alpha3
-fig2 = px.choropleth(map_df, locations=map_df.index,locationmode="country names",
-                    color=2022, # lifeExp is a column of gapminder
-                    hover_name=map_df.index, # column to add to hover information
+fig2 = px.choropleth(map_df, locations="ISO",
+                    color=input_years,
+                    hover_name=map_df.index,
                     color_continuous_scale=px.colors.sequential.Burg,
                     scope="africa",
                     height=600
