@@ -36,5 +36,5 @@ fig.update_layout(
 
 r.plotly_chart(fig,use_container_width=True)
 show_df = pred_df.copy().reset_index().rename(columns={"index":"Year",country_name:"New HIV Population"})
-show_df[["Year","New HIV Population"]] = show_df[["Year","New HIV Population"]].astype(["object","int"])
+show_df[["Year","New HIV Population"]] = show_df[["Year","New HIV Population"]].astype("object")
 l.dataframe(show_df,use_container_width=True)
