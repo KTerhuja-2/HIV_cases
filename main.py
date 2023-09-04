@@ -45,7 +45,7 @@ l.dataframe(show_df.style.format(thousands=''),use_container_width=True)
 
 
 map_df = pd.read_csv("HIV_data 1990-2032.csv",index_col=0).dropna(axis=1)
-map_df = df[sorted(set(country_list).intersection(df.columns))].transpose()[[input_years+max(df.index)]].copy()
+map_df = df[sorted(set(country_list).intersection(df.columns))].transpose()[[input_years]].copy()
 map_df["ISO"] = utils.country_iso_alpha3
 fig2 = px.choropleth(map_df, locations=map_df.index,locationmode="country names",
                     color=2022, # lifeExp is a column of gapminder
