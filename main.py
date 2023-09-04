@@ -71,7 +71,7 @@ fig2.update_geos(
     showframe=True,
     framewidth=5,
     framecolor="rgb(150,150,150)",
-    countrycolor="white",
+    countrywidth=0
     )
 fig.update_layout(plot_bgcolor = "rgb(14,17,23)")
 rr.plotly_chart(fig2,use_container_width=True)
