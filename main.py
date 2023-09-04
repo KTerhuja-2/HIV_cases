@@ -52,7 +52,7 @@ fig2 = px.choropleth(map_df, locations=map_df.index,locationmode="country names"
                     height=600
 )
 fig2.update_geos(
-    bgcolor="rgb(214,17,23)",
+    bgcolor="rgb(14,17,23)",
     showcoastlines=False,
     showland=False,
     showocean=False,
