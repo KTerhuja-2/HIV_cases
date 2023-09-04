@@ -45,26 +45,27 @@ l.dataframe(show_df.style.format(thousands=''),use_container_width=True)
 
 
 map_df = pd.read_csv("HIV_data 1990-2032.csv",index_col=0).dropna(axis=1)
-map_df = df[sorted(set(country_list).intersection(df.columns))].transpose()[[input_years]].copy()
-map_df["ISO"] = utils.country_iso_alpha3
-fig2 = px.choropleth(map_df, locations=map_df.index,locationmode="country names",
-                    color=2022, # lifeExp is a column of gapminder
-                    hover_name=map_df.index, # column to add to hover information
-                    color_continuous_scale=px.colors.sequential.Burg,
-                    scope="africa",
-                    height=600
-)
-fig2.update_geos(
-    bgcolor="rgb(14,17,23)",
-    showcoastlines=False,
-    showland=False,
-    showocean=False,
-    showlakes=False,
-    showrivers=False,
-    showframe=True,
-    framewidth=5,
-    framecolor="rgb(150,150,150)"
+st.dataframe(map_df)
+# map_df = df[sorted(set(country_list).intersection(df.columns))].transpose()[[input_years]].copy()
+# map_df["ISO"] = utils.country_iso_alpha3
+# fig2 = px.choropleth(map_df, locations=map_df.index,locationmode="country names",
+#                     color=2022, # lifeExp is a column of gapminder
+#                     hover_name=map_df.index, # column to add to hover information
+#                     color_continuous_scale=px.colors.sequential.Burg,
+#                     scope="africa",
+#                     height=600
+# )
+# fig2.update_geos(
+#     bgcolor="rgb(14,17,23)",
+#     showcoastlines=False,
+#     showland=False,
+#     showocean=False,
+#     showlakes=False,
+#     showrivers=False,
+#     showframe=True,
+#     framewidth=5,
+#     framecolor="rgb(150,150,150)"
 
-    )
-fig.update_layout(plot_bgcolor = "rgb(14,17,23)")
-r.plotly_chart(fig2,use_container_width=True)
+#     )
+# fig.update_layout(plot_bgcolor = "rgb(14,17,23)")
+# r.plotly_chart(fig2,use_container_width=True)
