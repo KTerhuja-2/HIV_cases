@@ -66,7 +66,7 @@ fig2 = go.Figure(data=go.Choropleth(z=map_df[input_years],
     locations=map_df["ISO"],
     color=input_years,
     hoverlabel=map_df.index,
-    hoverinfo=map_df[input_years]
+    hoverinfo=map_df[input_years],
     colorscale="amp",
     # color_continuous_scale=px.colors.diverging.balance,
     title=f"New HIV Population in year {input_years}",
