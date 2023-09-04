@@ -18,19 +18,19 @@ country_name = st.selectbox("Country",sorted(set(country_list).intersection(df.c
 input_years = st.slider("Forecast Period (in Years)",1,10)
 
 fit_df,pred_df = utils.predict(df,country_name,input_years)
-plot_df = utils.combine(df[[country_name]],fit_df,pred_df).rename(columns={country_name:"HIV Population"})
+plot_df = utils.combine(df[[country_name]],fit_df,pred_df).rename(columns={country_name:"New HIV Population"})
 
 fig = px.line(plot_df,
               x=plot_df.index,
-              y="HIV Population",
+              y="New HIV Population",
               color="Tag",
-              title=f"HIV Population in {country_name}",
+              title=f"New HIV Population in {country_name}",
               color_discrete_sequence=["dodgerblue","mediumspringgreen","crimson"])
 fig.update_layout(
-    xaxis_title="Year", yaxis_title="HIV Population"
+    xaxis_title="Year", yaxis_title="New HIV Population"
 )
 
 st.plotly_chart(fig)
-show_df = pred_df.copy().reset_index().rename(columns={"index":"Year"})
-show_df["Year"] = show_df["Year"].astype("object")
+show_df = pred_df.copy().reset_index().rename(columns={"index":"Year",country_name:"New HIV Population"})
+show_df = show_df.style.format({'Year': lambda x : '{:.4f}'.format(x), "New HIV Population": lambda x : '{:.4f}'.format(x)})
 st.dataframe(show_df)
