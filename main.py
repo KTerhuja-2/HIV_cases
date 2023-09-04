@@ -4,9 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import utils
 
-st.set_page_config(page_title="HIV Cases",layout="wide")
-
-st.markdown("###### New HIV Cases Forecast in Africa")
+st.set_page_config(page_title="HIV POC",,page_icon="🎗️",layout="wide")
 
 df = pd.read_csv("HIV_data 1990-2022.csv",index_col=0).dropna(axis=1)
 country_list = [
