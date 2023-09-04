@@ -47,7 +47,7 @@ map_df["ISO"] = utils.country_iso_alpha3
 fig2 = px.choropleth(map_df, locations=map_df.index,locationmode="country names",
                     color=2022, # lifeExp is a column of gapminder
                     hover_name=map_df.index, # column to add to hover information
-                    color_continuous_scale=px.colors.sequential.Tealgrn,
+                    color_continuous_scale=px.colors.sequential.Tealgrn_r,
 )
 fig2.update_geos(
     showcoastlines=True, coastlinecolor="rgb(150,150,150)",
