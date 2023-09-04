@@ -32,5 +32,6 @@ fig.update_layout(
 
 st.plotly_chart(fig)
 show_df = pred_df.copy().reset_index().rename(columns={"index":"Year",country_name:"New HIV Population"})
+show_df["Year"] = show_df["Year"].astype("int")
 show_df = show_df.style.format({'Year': lambda x : '{:.4f}'.format(x), "New HIV Population": lambda x : '{:.4f}'.format(x)})
 st.dataframe(show_df)
