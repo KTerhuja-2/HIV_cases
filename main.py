@@ -19,7 +19,12 @@ input_years = st.slider("Forecast Period (in Years)",1,10)
 
 plot_df = utils.combine(df[[country_name]],utils.predict(df,country_name,input_years)).rename(columns={country_name:"HIV Population"})
 
-fig = px.line(plot_df,x=plot_df.index,y="HIV Population",color="Tag",title=f"HIV Population in {country_name}")
+fig = px.line(plot_df,
+              x=plot_df.index,
+              y="HIV Population",
+              color="Tag",
+              title=f"HIV Population in {country_name}",
+              color_discrete_sequence=["dodgerblue","crimsonred"])
 fig.update_layout(
     xaxis_title="Year", yaxis_title="HIV Population"
 )
