@@ -31,5 +31,6 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig)
-
-st.dataframe(pred_df)
+show_df = pred_df.copy().reset_index().rename(columns={"index":"Year"})
+show_df["Year"] = show_df["Year"].astype("object")
+st.dataframe(show_df)
