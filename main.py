@@ -16,6 +16,8 @@ country_list = [
     'South Africa', 'South Sudan', 'Sudan', 'Tanzania', 'Togo', 'Tunisia', 'Uganda', 'Zambia', 'Zimbabwe'
 ]
 
+
+
 l,r = st.columns([1,3])
 country_name = l.selectbox("Country",sorted(set(country_list).intersection(df.columns)))
 input_years = r.slider("Forecast Period (in Years)",1,10)
@@ -39,3 +41,7 @@ show_df = pred_df.copy().reset_index().rename(columns={"index":"Year",country_na
 show_df["Year"] = show_df["Year"].astype("object")
 show_df["New HIV Population"] = show_df["New HIV Population"].astype("int")
 l.dataframe(show_df.style.format(thousands=''),use_container_width=True)
+
+map_df = pred_df.copy()
+map_df["ISO"] = utils.country_iso_alpha3
+st.dataframe(map_df)
