@@ -44,4 +44,8 @@ l.dataframe(show_df.style.format(thousands=''),use_container_width=True)
 
 map_df = df[sorted(set(country_list).intersection(df.columns))].transpose()[[2022]].copy()
 map_df["ISO"] = utils.country_iso_alpha3
-st.dataframe(map_df)
+fig2 = px.choropleth(map_df, locations="ISO",
+                    color=2022, # lifeExp is a column of gapminder
+                    hover_name=map_df.index, # column to add to hover information
+                    color_continuous_scale=px.colors.sequential.Plasma)
+st.plotly_chart(fig2,use_container_width=True)
