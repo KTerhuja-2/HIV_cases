@@ -57,7 +57,8 @@ fig2.update_geos(
     showlakes=False, lakecolor="Blue",
     showrivers=False, rivercolor="Blue",
     showcountries=False,
-    visible=False
+    visible=False,
+    countrywidth=0
     )
 fig.update_layout(plot_bgcolor = "rgb(14,17,23)")
 st.plotly_chart(fig2,use_container_width=True)
