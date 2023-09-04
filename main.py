@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import utils
 
-df = pd.read_csv("HIV_data 1990-2022.csv",index_col=0).dropna()
+df = pd.read_csv("HIV_data 1990-2022.csv",index_col=0).dropna(axis=1)
 country_list = [
     'Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cameroon', 
     'Central African Republic', 'Chad', 'Comoros', 'Congo', "Côte d'Ivoire", 
