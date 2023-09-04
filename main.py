@@ -47,5 +47,6 @@ map_df["ISO"] = utils.country_iso_alpha3
 fig2 = px.choropleth(map_df, locations="ISO",
                     color=2022, # lifeExp is a column of gapminder
                     hover_name=map_df.index, # column to add to hover information
-                    color_continuous_scale=px.colors.sequential.Plasma)
+                    color_continuous_scale=px.colors.sequential.Plasma,
+                    scope="africa")
 st.plotly_chart(fig2,use_container_width=True)
