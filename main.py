@@ -42,6 +42,6 @@ show_df["Year"] = show_df["Year"].astype("object")
 show_df["New HIV Population"] = show_df["New HIV Population"].astype("int")
 l.dataframe(show_df.style.format(thousands=''),use_container_width=True)
 
-map_df = pred_df.copy()
+map_df = df[["2022"]].transpose().copy()
 map_df["ISO"] = utils.country_iso_alpha3
 st.dataframe(map_df)
