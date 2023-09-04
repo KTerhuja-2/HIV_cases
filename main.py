@@ -49,4 +49,5 @@ fig2 = px.choropleth(map_df, locations="ISO",
                     hover_name=map_df.index, # column to add to hover information
                     color_continuous_scale=px.colors.sequential.Plasma,
                     scope="africa")
+fig2.update_layout(plot_bgcolor = "rgba(0,0,0,0)")
 st.plotly_chart(fig2,use_container_width=True)
