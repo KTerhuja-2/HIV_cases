@@ -51,28 +51,17 @@ l.dataframe(show_df.style.format(thousands=''),use_container_width=True)
 map_df = pd.read_csv("HIV_data 1990-2032.csv",index_col=0).dropna(axis=1)
 map_df = map_df[sorted(set(country_list).intersection(df.columns))].transpose()[[input_years]].copy()
 map_df["ISO"] = utils.country_iso_alpha3
-# fig2 = px.choropleth(
-#     map_df, 
-#     locations="ISO",
-#     color=input_years,
-#     hover_name=map_df.index,
-#     color_continuous_scale=px.colors.sequential.amp,
-#     # color_continuous_scale=px.colors.diverging.balance,
-#     scope="africa",
-#     title=f"New HIV Population in year {input_years}",
-#     height=600
-#     )
-fig2 = go.Figure(data=go.Choropleth(z=map_df[input_years], 
-    locations=map_df["ISO"],
+fig2 = px.choropleth(
+    map_df, 
+    locations="ISO",
     color=input_years,
-    hoverlabel=map_df.index,
-    hoverinfo=map_df[input_years],
-    colorscale="amp",
+    hover_name=map_df.index,
+    color_continuous_scale=px.colors.sequential.amp,
     # color_continuous_scale=px.colors.diverging.balance,
+    scope="africa",
     title=f"New HIV Population in year {input_years}",
-    height=600,
-    colorbar_title=f"Year {input_years}"
-    ))
+    height=600
+    )
 fig2.update_geos(
     bgcolor="rgb(14,17,23)",
     showcoastlines=False,
@@ -83,8 +72,6 @@ fig2.update_geos(
     showframe=True,
     framewidth=5,
     framecolor="rgb(150,150,150)",
-    countrywidth=0,
-    scope="africa"
     )
 fig.update_layout(plot_bgcolor = "rgb(14,17,23)")
 rr.plotly_chart(fig2,use_container_width=True)
