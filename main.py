@@ -29,7 +29,7 @@ fig = px.line(plot_df,
               color="Tag",
               title=f"New HIV Population in {country_name}",
               color_discrete_sequence=["dodgerblue","mediumspringgreen","crimson"],
-              height=500)
+              height=800)
 fig.update_layout(
     xaxis_title="Year", yaxis_title="New HIV Population"
 )
