@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import utils
-import seaborn
-
 
 df = pd.read_csv("HIV_data 1990-2022.csv",index_col=0)
 country_list = df.columns
