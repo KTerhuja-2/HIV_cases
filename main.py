@@ -18,9 +18,9 @@ country_list = [
 
 
 
-l,r = st.columns([1,3])
+l,c,r = st.columns([1,2,1])
 country_name = l.selectbox("Country",sorted(set(country_list).intersection(df.columns)))
-input_years = r.slider("Forecast Period (in Years)",1,10)
+input_years = c.slider("Forecast Period (in Years)",1,10)
 
 fit_df,pred_df = utils.predict(df,country_name,input_years)
 plot_df = utils.combine(df[[country_name]],fit_df,pred_df).rename(columns={country_name:"New HIV Population"})
@@ -36,7 +36,7 @@ fig.update_layout(
     xaxis_title="Year", yaxis_title="New HIV Population"
 )
 
-r.plotly_chart(fig,use_container_width=True)
+c.plotly_chart(fig,use_container_width=True)
 show_df = pred_df.copy().reset_index().rename(columns={"index":"Year",country_name:"New HIV Population"})
 show_df["Year"] = show_df["Year"].astype("object")
 show_df["New HIV Population"] = show_df["New HIV Population"].astype("int")
@@ -61,4 +61,4 @@ fig2.update_geos(
 
     )
 fig.update_layout(plot_bgcolor = "rgb(14,17,23)")
-st.plotly_chart(fig2,use_container_width=True)
+r.plotly_chart(fig2,use_container_width=True)
