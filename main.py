@@ -44,9 +44,9 @@ show_df["New HIV Population"] = show_df["New HIV Population"].astype("int")
 l.dataframe(show_df.style.format(thousands=''),use_container_width=True)
 
 
-map_df = pd.read_csv("HIV_data 1990-2032.csv",index_col=0).dropna(axis=1).transpose()
+map_df = pd.read_csv("HIV_data 1990-2032.csv",index_col=0).dropna(axis=1)
 st.dataframe(map_df)
-map_df = df[sorted(set(country_list).intersection(df.columns))].transpose()[[str(input_years)]].copy()
+map_df = df[sorted(set(country_list).intersection(df.columns))].transpose()[[input_years]].copy()
 map_df["ISO"] = utils.country_iso_alpha3
 fig2 = px.choropleth(map_df, locations="ISO",
                     color=input_years,
