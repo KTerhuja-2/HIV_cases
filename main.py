@@ -25,13 +25,15 @@ input_years = r.select_slider("Forecast Upto Year",[2023+i for i in range(10)])
 fit_df,pred_df = utils.predict(df,country_name,input_years-2022)
 plot_df = utils.combine(df[[country_name]],fit_df,pred_df).rename(columns={country_name:"New HIV Population"})
 
-fig = px.line(plot_df,
-              x=plot_df.index,
-              y="New HIV Population",
-              color="Tag",
-              title=f"New HIV Population in {country_name}",
-              color_discrete_sequence=["dodgerblue","mediumspringgreen","crimson"],
-              height=600)
+fig = px.line(
+    plot_df,
+    x=plot_df.index,
+    y="New HIV Population",
+    color="Tag",
+    title=f"New HIV Population in {country_name}",
+    color_discrete_sequence=["dodgerblue","mediumspringgreen","crimson"],
+    height=600
+    )
 fig.update_layout(
     xaxis_title="Year", yaxis_title="New HIV Population"
 )
@@ -47,14 +49,17 @@ l.dataframe(show_df.style.format(thousands=''),use_container_width=True)
 map_df = pd.read_csv("HIV_data 1990-2032.csv",index_col=0).dropna(axis=1)
 map_df = map_df[sorted(set(country_list).intersection(df.columns))].transpose()[[input_years]].copy()
 map_df["ISO"] = utils.country_iso_alpha3
-fig2 = px.choropleth(map_df, locations="ISO",
-                    color=input_years,
-                    hover_name=map_df.index,
-                    color_continuous_scale=px.colors.sequential.amp,
-                    # color_continuous_scale=px.colors.diverging.balance,
-                    scope="africa",
-                    height=600
-)
+fig2 = px.choropleth(
+    map_df, 
+    locations="ISO",
+    color=input_years,
+    hover_name=map_df.index,
+    color_continuous_scale=px.colors.sequential.amp,
+    # color_continuous_scale=px.colors.diverging.balance,
+    scope="africa",
+    title=f"New HIV Population in {country_name}",
+    height=600
+    )
 fig2.update_geos(
     bgcolor="rgb(14,17,23)",
     showcoastlines=False,
@@ -65,7 +70,6 @@ fig2.update_geos(
     showframe=True,
     framewidth=5,
     framecolor="rgb(150,150,150)"
-
     )
 fig.update_layout(plot_bgcolor = "rgb(14,17,23)")
 rr.plotly_chart(fig2,use_container_width=True)
