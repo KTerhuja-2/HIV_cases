@@ -20,9 +20,10 @@ country_list = [
 
 l,c,r = st.columns([1,2,2])
 country_name = l.selectbox("Country",sorted(set(country_list).intersection(df.columns)))
-input_years = c.slider("Forecast Period (in Years)",1,10)
+# input_years = c.slider("Forecast Period (in Years)",1,10)
+input_years = c.select_slider("Forecast Upto Year",[2023+i for i in range(10)])
 
-fit_df,pred_df = utils.predict(df,country_name,input_years)
+fit_df,pred_df = utils.predict(df,country_name,input_years-2022)
 plot_df = utils.combine(df[[country_name]],fit_df,pred_df).rename(columns={country_name:"New HIV Population"})
 
 fig = px.line(plot_df,
@@ -42,7 +43,9 @@ show_df["Year"] = show_df["Year"].astype("object")
 show_df["New HIV Population"] = show_df["New HIV Population"].astype("int")
 l.dataframe(show_df.style.format(thousands=''),use_container_width=True)
 
-map_df = df[sorted(set(country_list).intersection(df.columns))].transpose()[[2022]].copy()
+
+map_df = pd.read_csv("HIV_data 1990-2032.csv",index_col=0).dropna(axis=1)
+map_df = df[sorted(set(country_list).intersection(df.columns))].transpose()[[input_years+max(df.index)]].copy()
 map_df["ISO"] = utils.country_iso_alpha3
 fig2 = px.choropleth(map_df, locations=map_df.index,locationmode="country names",
                     color=2022, # lifeExp is a column of gapminder
