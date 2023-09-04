@@ -4,7 +4,7 @@ import plotly.express as px
 import utils
 
 
-df = pd.read_csv("HIV_data 1990-2022.csv",index_col=0).rename_axis("Year")
+df = pd.read_csv("HIV_data 1990-2022.csv",index_col=0)
 country_list = df.columns
 country_name = st.selectbox("Country",country_list)
 input_years = st.slider("Forecast Period",1,10)
