@@ -43,6 +43,7 @@ rl.plotly_chart(fig,use_container_width=True)
 show_df = pred_df.copy().reset_index().rename(columns={"index":"Year",country_name:"New HIV Population"})
 show_df["Year"] = show_df["Year"].astype("object")
 show_df["New HIV Population"] = show_df["New HIV Population"].astype("int")
+l.markdown(f"## Forecast Upto year {input_years}")
 l.dataframe(show_df.style.format(thousands=''),use_container_width=True)
 
 
