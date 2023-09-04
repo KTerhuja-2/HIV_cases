@@ -3,7 +3,7 @@ from statsmodels.tsa.deterministic import DeterministicProcess
 import pandas as pd
  
 def predict(df,country,steps):
-    y = pd.DataFrame(df[country]).copy()
+    y = df[[country]]
 
     # Create trend features
     dp = DeterministicProcess(
@@ -32,4 +32,15 @@ def predict(df,country,steps):
         index=X_pred.index,
         columns=y.columns,
     )
-    return y_pred
+    
+    pred_df = pd.DataFrame(columns=[country,"History"],index=y_pred.index.union(y.index))
+    
+    pred_df.loc[y_pred.index,country] = y_pred.values.reshape(1,-1)
+    pred_df.loc[y.index,country] = y.values.reshape(1,-1)
+    
+    pred_df.loc[y_pred.index,"History"] = "Forecast"
+    pred_df.loc[y.index,"History"] = "HIstorical"
+    
+    pred_df.rename(columns={country:"HIV Population"},inplace=True)
+    pred_df.rename_axis("Years",inplace=True)
+    return pred_df
