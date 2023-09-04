@@ -48,13 +48,15 @@ fig2 = px.choropleth(map_df, locations=map_df.index,locationmode="country names"
                     color=2022, # lifeExp is a column of gapminder
                     hover_name=map_df.index, # column to add to hover information
                     color_continuous_scale=px.colors.sequential.Burg,
+                    scope="africa"
 )
 fig2.update_geos(
     showcoastlines=True, coastlinecolor="rgb(150,150,150)",
     showland=False, landcolor="rgb(14,17,23)",
     showocean=True, oceancolor="rgb(14,17,23)",
     showlakes=False, lakecolor="Blue",
-    showrivers=False, rivercolor="Blue"
+    showrivers=False, rivercolor="Blue",
+    showcountries=False
     )
 fig.update_layout(plot_bgcolor = "rgb(14,17,23)")
 st.plotly_chart(fig2,use_container_width=True)
