@@ -42,7 +42,7 @@ show_df["Year"] = show_df["Year"].astype("object")
 show_df["New HIV Population"] = show_df["New HIV Population"].astype("int")
 l.dataframe(show_df.style.format(thousands=''),use_container_width=True)
 
-map_df = df[sorted(set(country_list).intersection(df.columns)))].transpose()[[2022]].copy()
+map_df = df[sorted(set(country_list).intersection(df.columns))].transpose()[[2022]].copy()
 map_df["ISO"] = utils.country_iso_alpha3
 fig2 = px.choropleth(map_df, locations=map_df.index,locationmode="country names",
                     color=2022, # lifeExp is a column of gapminder
