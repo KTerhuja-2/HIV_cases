@@ -41,8 +41,8 @@ def predict(df,country,steps):
     return pred_df
 
 def combine(hist_df,fore_df):
-    temp_hist_df = hist_df.copy()
-    temp_fore_df = fore_df.copy()
+    temp_hist_df = hist_df.copy().reset_index()
+    temp_fore_df = fore_df.copy().reset_index()
     temp_hist_df["Tag"] = "Historical"
     temp_fore_df["Tag"] = "Forecast"
-    return pd.concat([temp_hist_df.reset_index(),temp_fore_df.reset_index()],axis=0).rename(columns={"index":"Year"}).set_index("Year")
+    return pd.concat([temp_hist_df,temp_fore_df],axis=0).rename(columns={"index":"Year"}).set_index("Year")
