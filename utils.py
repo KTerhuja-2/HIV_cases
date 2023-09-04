@@ -48,4 +48,4 @@ def combine(hist_df,fits_df,fore_df):
     temp_hist_df["Tag"] = "Historical"
     temp_fits_df["Tag"] = "Regression"
     temp_fore_df["Tag"] = "Forecast"
-    return pd.concat([temp_hist_df,temp_fore_df],axis=0).rename(columns={"index":"Year"}).set_index("Year")
+    return pd.concat([temp_hist_df,temp_fits_df,temp_fore_df],axis=0).rename(columns={"index":"Year"}).set_index("Year")
