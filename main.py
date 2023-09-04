@@ -15,7 +15,7 @@ country_list = [
 ]
 
 country_name = st.selectbox("Country",country_list)
-input_years = st.slider("Forecast Period",1,10)
+input_years = st.slider("Forecast Period (in Years)",1,10)
 
 plot_df = utils.combine(df[[country_name]],utils.predict(df,country_name,input_years)).rename(columns={country_name:"HIV Population"})
 
