@@ -19,6 +19,9 @@ input_years = st.slider("Forecast Period",1,10)
 # st.dataframe(utils.predict(df,country_name,input_years))
 plot_df = utils.combine(df[[country_name]],utils.predict(df,country_name,input_years))
 # st.dataframe(plot_df)
-fig = px.line(plot_df,x=plot_df.index,y=country_name,color="Tag")
+fig = px.line(plot_df,x=plot_df.index,y=country_name,color="Tag",title=f"HIV Population in {country_name}")
+fig.update_layout(
+    xaxis_title="Year", yaxis_title="HIV Population"
+)
 st.plotly_chart(fig)
 
