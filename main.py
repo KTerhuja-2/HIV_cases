@@ -57,7 +57,8 @@ fig2.update_geos(
     showocean=False, oceancolor="rgb(14,17,23)",
     showlakes=False,
     showrivers=False,
-    framewidth=0
+    framewidth=1
+    framecolor="rgb(150,150,150)"
 
     )
 fig.update_layout(plot_bgcolor = "rgb(14,17,23)")
