@@ -51,14 +51,13 @@ fig2 = px.choropleth(map_df, locations=map_df.index,locationmode="country names"
                     scope="africa"
 )
 fig2.update_geos(
+    bgcolor="rgb(0,0,0,0)"
     showcoastlines=True, coastlinecolor="rgb(150,150,150)",
-    showland=False, landcolor="rgb(14,17,23)",
+    showland=True, landcolor="rgb(14,17,23)",
     showocean=True, oceancolor="rgb(14,17,23)",
-    showlakes=False, lakecolor="Blue",
-    showrivers=False, rivercolor="Blue",
-    showcountries=False,
-    visible=False,
-    countrywidth=0
+    showlakes=False,
+    showrivers=False,
+
     )
 fig.update_layout(plot_bgcolor = "rgb(14,17,23)")
 st.plotly_chart(fig2,use_container_width=True)
