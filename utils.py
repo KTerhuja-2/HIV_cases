@@ -33,16 +33,19 @@ def predict(df,country,steps):
         columns=y.columns,
     )
     
-    pred_df = pd.DataFrame(columns=[country],index=y_pred.index.union(y.index))
+    fit_df = pd.DataFrame(columns=[country],index=y_fit)
+    fit_df.loc[y_fit.index,country] = y_fit.values.reshape(1,-1)
     
+    pred_df = pd.DataFrame(columns=[country],index=y_pred)
     pred_df.loc[y_pred.index,country] = y_pred.values.reshape(1,-1)
-    pred_df.loc[y_fit.index,country] = y_fit.values.reshape(1,-1)
     
-    return pred_df
+    return fit_df,pred_df
 
-def combine(hist_df,fore_df):
+def combine(hist_df,fits_df,fore_df):
     temp_hist_df = hist_df.copy().reset_index()
+    temp_fits_df = fits_df.copy().reset_index()
     temp_fore_df = fore_df.copy().reset_index()
     temp_hist_df["Tag"] = "Historical"
+    temp_fits_df["Tag"] = "Regression"
     temp_fore_df["Tag"] = "Forecast"
     return pd.concat([temp_hist_df,temp_fore_df],axis=0).rename(columns={"index":"Year"}).set_index("Year")
