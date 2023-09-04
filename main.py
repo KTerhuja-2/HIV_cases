@@ -62,15 +62,16 @@ map_df["ISO"] = utils.country_iso_alpha3
 #     title=f"New HIV Population in year {input_years}",
 #     height=600
 #     )
-fig2 = go.Figure(data=go.Choropleth(map_df, 
-    locations="ISO",
+fig2 = go.Figure(data=go.Choropleth(z=map_df[input_years], 
+    locations=map_df["ISO"],
     color=input_years,
-    hover_name=map_df.index,
-    color_continuous_scale=px.colors.sequential.amp,
+    hoverlabel=map_df.index,
+    hoverinfo=map_df[input_years]
+    colorscale="amp",
     # color_continuous_scale=px.colors.diverging.balance,
-    scope="africa",
     title=f"New HIV Population in year {input_years}",
-    height=600
+    height=600,
+    colorbar_title=f"Year {input_years}"
     ))
 fig2.update_geos(
     bgcolor="rgb(14,17,23)",
@@ -82,7 +83,8 @@ fig2.update_geos(
     showframe=True,
     framewidth=5,
     framecolor="rgb(150,150,150)",
-    countrywidth=0
+    countrywidth=0,
+    scope="africa"
     )
 fig.update_layout(plot_bgcolor = "rgb(14,17,23)")
 rr.plotly_chart(fig2,use_container_width=True)
