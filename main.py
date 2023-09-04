@@ -59,8 +59,7 @@ fig2 = px.choropleth(
     # color_continuous_scale=px.colors.diverging.balance,
     scope="africa",
     title=f"New HIV Population in year {input_years}",
-    height=600,
-    marker_line_color='white'
+    height=600
     )
 fig2.update_geos(
     bgcolor="rgb(14,17,23)",
@@ -72,6 +71,7 @@ fig2.update_geos(
     showframe=True,
     framewidth=5,
     framecolor="rgb(150,150,150)",
+    marker_line_color="white",
     )
 fig.update_layout(plot_bgcolor = "rgb(14,17,23)")
 rr.plotly_chart(fig2,use_container_width=True)
