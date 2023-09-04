@@ -57,7 +57,7 @@ fig2.update_geos(
     showocean=False,
     showlakes=False,
     showrivers=False,
-    framewidth=1,
+    framewidth=5,
     framecolor="rgb(150,150,150)"
 
     )
