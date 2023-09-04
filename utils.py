@@ -36,9 +36,11 @@ def predict(df,country,steps):
     pred_df = pd.DataFrame(columns=[country,"History"],index=y_pred.index.union(y.index))
     
     pred_df.loc[y_pred.index,country] = y_pred.values.reshape(1,-1)
+    pred_df.loc[y_fit.index,country] = y_fit.values.reshape(1,-1)
     pred_df.loc[y.index,country] = y.values.reshape(1,-1)
     
     pred_df.loc[y_pred.index,"History"] = "Forecast"
+    pred_df.loc[y_fit.index,"History"] = "Forecast"
     pred_df.loc[y.index,"History"] = "HIstorical"
     
     pred_df.rename(columns={country:"HIV Population"},inplace=True)
