@@ -50,7 +50,8 @@ map_df["ISO"] = utils.country_iso_alpha3
 fig2 = px.choropleth(map_df, locations="ISO",
                     color=input_years,
                     hover_name=map_df.index,
-                    color_continuous_scale=px.colors.sequential.Burg,
+                    # color_continuous_scale=px.colors.sequential.Burg,
+                    color_continuous_scale=px.colors.diverging.balance,
                     scope="africa",
                     height=600
 )
