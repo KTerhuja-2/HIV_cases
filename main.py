@@ -29,17 +29,6 @@ input_years = r.select_slider("Forecast Upto Year",[2023+i for i in range(10)])
 fit_df,pred_df = utils.predict(df,country_name,input_years-2022)
 plot_df = utils.combine(df[[country_name]],fit_df,pred_df).rename(columns={country_name:"New HIV Population"})
 
-#XGBoost
-forecasted = predict_xgboost.predict(country_name, input_years-2022)
-plot_values = forecasted.pd_dataframe()
-
-fig0 = px.line(
-    plot_values,
-    x=plot_values.index,
-    y=country_name
-
-)
-
 
 
 fig = px.line(
@@ -94,5 +83,22 @@ fig2.update_geos(
     )
 fig.update_layout(plot_bgcolor = "rgb(14,17,23)")
 rr.plotly_chart(fig2,use_container_width=True)
+
+
+
+
+
+#XGBoost
+forecasted = predict_xgboost.predict(country_name, input_years-2022)
+plot_values = forecasted.pd_dataframe()
+plot_values.reset_index(inplace=True)
+
+
+fig0 = px.line(
+    plot_values,
+    x="Time",
+    y=country_name
+
+)
 
 st.plotly_chart(fig0)
