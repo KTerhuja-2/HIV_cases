@@ -102,4 +102,4 @@ fig0 = px.line(
 
 )
 
-st.plotly_chart(fig0)
+st.dataframe(plot_values)
