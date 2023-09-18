@@ -33,15 +33,15 @@ plot_df = utils.combine(df[[country_name]],fit_df,pred_df).rename(columns={count
 forecasted = predict_xgboost.predict(country_name, input_years-2022)
 plot_values = forecasted.pd_dataframe()
 
-fig0 = px.line(
+fig = px.line(
     plot_values,
     x=plot_values.index,
     y=plot_values[country_name]
 
 )
-fig0.update_layout()
+fig.update_layout()
 
-fig = px.line(
+fig0 = px.line(
     plot_df,
     x=plot_df.index,
     y="New HIV Population",
