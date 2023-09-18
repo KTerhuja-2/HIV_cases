@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import utils
+import predict_xgboost
 
 st.set_page_config(page_title="HIV POC",page_icon="🎗️",layout="wide")
 st.markdown("#### New HIV Cases Forecast in Africa")
@@ -24,8 +25,20 @@ l,r = st.columns([1,4])
 country_name = l.selectbox("Country",sorted(set(country_list).intersection(df.columns)))
 input_years = r.select_slider("Forecast Upto Year",[2023+i for i in range(10)])
 
+#Linear Regression
 fit_df,pred_df = utils.predict(df,country_name,input_years-2022)
 plot_df = utils.combine(df[[country_name]],fit_df,pred_df).rename(columns={country_name:"New HIV Population"})
+
+#XGBoost
+forecasted = predict_xgboost.predict(country_name, input_years-2022)
+plot_values = forecasted.pd_dataframe()
+
+px.line(
+    plot_values,
+    x=plot_values.index,
+    y=plot_values[country_name]
+
+)
 
 fig = px.line(
     plot_df,

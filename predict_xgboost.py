@@ -27,8 +27,17 @@ if __name__ == "__main__":
     output = forecast(model_path = 'models/xgboost.pkl',
             scaler_path = 'models/scaler.pkl',
             step = 5)
-    print("flag")
-    print(output['Chad'].plot())
+    
+
+def predict(country_name, input_years):
+
+    output = forecast(model_path = 'models/xgboost.pkl',
+            scaler_path = 'models/scaler.pkl',
+            step = input_years)
+    
+    return output[country_name]
+
+
 
 
 
