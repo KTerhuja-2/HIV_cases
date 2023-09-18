@@ -33,12 +33,13 @@ plot_df = utils.combine(df[[country_name]],fit_df,pred_df).rename(columns={count
 forecasted = predict_xgboost.predict(country_name, input_years-2022)
 plot_values = forecasted.pd_dataframe()
 
-px.line(
+fig0 = px.line(
     plot_values,
     x=plot_values.index,
     y=plot_values[country_name]
 
 )
+fig0.update_layout()
 
 fig = px.line(
     plot_df,
@@ -49,6 +50,9 @@ fig = px.line(
     color_discrete_sequence=["dodgerblue","mediumspringgreen","crimson"],
     height=600
     )
+
+
+
 fig.update_layout(
     xaxis_title="Year", yaxis_title="New HIV Population"
 )
