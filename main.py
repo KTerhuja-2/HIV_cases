@@ -33,15 +33,16 @@ plot_df = utils.combine(df[[country_name]],fit_df,pred_df).rename(columns={count
 forecasted = predict_xgboost.predict(country_name, input_years-2022)
 plot_values = forecasted.pd_dataframe()
 
-fig = px.line(
+fig0 = px.line(
     plot_values,
     x=plot_values.index,
     y=country_name
 
 )
-fig.update_layout()
 
-fig0 = px.line(
+
+
+fig = px.line(
     plot_df,
     x=plot_df.index,
     y="New HIV Population",
@@ -93,3 +94,5 @@ fig2.update_geos(
     )
 fig.update_layout(plot_bgcolor = "rgb(14,17,23)")
 rr.plotly_chart(fig2,use_container_width=True)
+
+st.plotly_chart(fig)
