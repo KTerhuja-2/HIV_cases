@@ -92,8 +92,8 @@ rr.plotly_chart(fig2,use_container_width=True)
 forecasted = predict_xgboost.predict(country_name, input_years-2022)
 plot_values = forecasted.pd_dataframe()
 plot_values.reset_index(inplace=True)
-plot_values = plot_values[country_name].astype('int')
-plot_values = plot_values['Time'].astype('object')
+plot_values[country_name] = plot_values[country_name].astype('int')
+plot_values['Time'] = plot_values['Time'].astype('object')
 
 fig0 = px.line(
     plot_values,
