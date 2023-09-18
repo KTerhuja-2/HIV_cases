@@ -1,3 +1,4 @@
 scikit-learn
 statsmodels
 plotly
+darts
