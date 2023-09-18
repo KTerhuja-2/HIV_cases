@@ -36,7 +36,7 @@ plot_values = forecasted.pd_dataframe()
 fig = px.line(
     plot_values,
     x=plot_values.index,
-    y=plot_values[country_name]
+    y=country_name
 
 )
 fig.update_layout()
