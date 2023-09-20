@@ -20,13 +20,6 @@ def forecast(model_path, scaler_path, step=4):
     scaled_forecast = scaler.inverse_transform(forecasted)
     return scaled_forecast
 
-
-
-if __name__ == "__main__":
-
-    output = forecast(model_path = 'models/xgboost.pkl',
-            scaler_path = 'models/scaler.pkl',
-            step = 5)
     
 
 def predict(country_name, input_years):
