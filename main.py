@@ -73,7 +73,10 @@ l.dataframe(prediction.pd_dataframe().astype("int").style.format(thousands=''),u
 
 
 map_df = pd.read_csv("Forecasted HIV upto 2032.csv")
-map_df = map_df.transpose()[[str(pd.to_datetime(str(input_years)))]].copy()
+map_df.set_index("Time", inplace=True)
+year = str(pd.to_datetime(str(input_years)))
+year = year[:-9]
+map_df = map_df.transpose()[[year]].copy()
 map_df["ISO"] = utils.country_iso_alpha3
 map_df.columns = ["New Cases", "ISO"]
 fig2 = px.choropleth(
