@@ -114,9 +114,8 @@ series_aids = TimeSeries.from_dataframe(data,
 
 series, prediction = utils.es_model(series_aids, country_name, input_years-2022)
 
-with st.echo('below'):
-    interactive_fig = plt.figure()
-    series.plot()
+interactive_fig = plt.figure()
+series.plot()
 
     # st.subheader("Training Controls")
     # num_periods = st.slider("Number of validation months", min_value=2, max_value=len(series) - 24, value=36, help='How many months worth of datapoints to exclude from training')
@@ -129,7 +128,7 @@ with st.echo('below'):
     # model = ExponentialSmoothing()
     # model.fit(train)
     # prediction = model.predict(len(val), num_samples=num_samples)
-    prediction.plot(label='forecast')
+prediction.plot(label='forecast')
 
-    plt.legend()
-    st.pyplot(interactive_fig)
+plt.legend()
+st.pyplot(interactive_fig)
