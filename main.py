@@ -41,11 +41,10 @@ series_aids = TimeSeries.from_dataframe(data,
 series, prediction = utils.es_model(series_aids, country_name, input_years-2022)
 
 interactive_fig = plt.figure()
-series.plot()
+series.plot(label= country_name)
 prediction.plot(label='forecast')
 
 plt.legend()
-st.pyplot(interactive_fig)
 
 
 fig = px.line(
@@ -105,18 +104,18 @@ rr.plotly_chart(fig2,use_container_width=True)
 
 
 
-#XGBoost
-forecasted = predict_xgboost.predict(country_name, input_years-2022)
-plot_values = forecasted.pd_dataframe()
-plot_values.reset_index(inplace=True)
-plot_values[country_name] = plot_values[country_name].astype('int')
-plot_values['Time'] = plot_values['Time'].astype('object')
+# #XGBoost
+# forecasted = predict_xgboost.predict(country_name, input_years-2022)
+# plot_values = forecasted.pd_dataframe()
+# plot_values.reset_index(inplace=True)
+# plot_values[country_name] = plot_values[country_name].astype('int')
+# plot_values['Time'] = plot_values['Time'].astype('object')
 
-fig0 = px.line(
-    plot_values,
-    x="Time",
-    y=country_name
+# fig0 = px.line(
+#     plot_values,
+#     x="Time",
+#     y=country_name
 
-)
+# )
 
 
