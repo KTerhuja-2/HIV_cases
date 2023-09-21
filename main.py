@@ -4,6 +4,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 import utils
 import predict_xgboost
+import matplotlib.pyplot as plt
+from darts import TimeSeries
+
 
 st.set_page_config(page_title="HIV POC",page_icon="🎗️",layout="wide")
 st.markdown("#### New HIV Cases Forecast in Africa")
@@ -16,7 +19,7 @@ country_list = [
     'Eswatini', 'Ethiopia', 'Gabon', 'Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau', 'Kenya', 'Lesotho', 
     'Liberia', 'Libya', 'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Morocco', 'Mozambique', 
     'Namibia', 'Niger', 'Nigeria', 'Rwanda', 'Sao Tome and Principe', 'Senegal', 'Sierra Leone', 'Somalia', 
-    'South Africa', 'South Sudan', 'Sudan', 'Tanzania', 'Togo', 'Tunisia', 'Uganda', 'Zambia', 'Zimbabwe'
+    'South Africa', 'South Sudan', 'Sudan', 'Togo', 'Tunisia', 'Uganda', 'Zambia', 'Zimbabwe'
 ]
 
 
@@ -28,6 +31,8 @@ input_years = r.select_slider("Forecast Upto Year",[2023+i for i in range(10)])
 #Linear Regression
 fit_df,pred_df = utils.predict(df,country_name,input_years-2022)
 plot_df = utils.combine(df[[country_name]],fit_df,pred_df).rename(columns={country_name:"New HIV Population"})
+
+#Exponential Smoothing
 
 
 
@@ -102,4 +107,29 @@ fig0 = px.line(
 
 )
 
-st.dataframe(plot_values)
+data = pd.read_csv('Cleaned HIV Data.csv')
+series_aids = TimeSeries.from_dataframe(data,
+                                    time_col="Time"
+                                    )
+
+series, prediction = utils.es_model(series_aids, country_name, input_years-2022)
+
+with st.echo('below'):
+    interactive_fig = plt.figure()
+    series.plot()
+
+    # st.subheader("Training Controls")
+    # num_periods = st.slider("Number of validation months", min_value=2, max_value=len(series) - 24, value=36, help='How many months worth of datapoints to exclude from training')
+    # num_samples = st.number_input("Number of prediction samples", min_value=1, max_value=10000, value=1000, help="Number of times a prediction is sampled for a probabilistic model")
+    # st.subheader("Plotting Controls")
+    # low_quantile = st.slider('Lower Percentile', min_value=0.01, max_value=0.99, value=0.05, help='The quantile to use for the lower bound of the plotted confidence interval.')
+    # high_quantile = st.slider('High Percentile', min_value=0.01, max_value=0.99, value=0.95, help='The quantile to use for the upper bound of the plotted confidence interval.')
+    
+    # train, val = series[:-num_periods], series[-num_periods:]
+    # model = ExponentialSmoothing()
+    # model.fit(train)
+    # prediction = model.predict(len(val), num_samples=num_samples)
+    prediction.plot(label='forecast')
+
+    plt.legend()
+    st.pyplot(interactive_fig)

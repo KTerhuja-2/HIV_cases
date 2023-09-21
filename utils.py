@@ -1,6 +1,36 @@
 from sklearn.linear_model import LinearRegression
 from statsmodels.tsa.deterministic import DeterministicProcess
 import pandas as pd
+import torch
+import torch.nn as nn
+import torch.optim as optim
+import numpy as np
+import pandas as pd
+import shutil
+from sklearn.preprocessing import MinMaxScaler
+from tqdm import tqdm_notebook as tqdm
+import matplotlib.pyplot as plt
+
+
+from darts import TimeSeries
+from darts.dataprocessing.transformers import Scaler
+from darts.models import RNNModel, ExponentialSmoothing, BlockRNNModel, NBEATSModel
+from darts.models.forecasting.xgboost import XGBModel
+from darts.models.forecasting.rnn_model import RNNModel
+
+from darts.metrics import mape
+from darts.utils.statistics import check_seasonality, plot_acf
+from darts.datasets import AirPassengersDataset, SunspotsDataset
+from darts.utils.timeseries_generation import datetime_attribute_timeseries
+from darts.metrics import mape, smape, mae
+from darts.utils.utils import ModelMode
+
+import warnings
+
+warnings.filterwarnings("ignore")
+import logging
+
+logging.disable(logging.CRITICAL)
  
 def predict(df,country,steps):
     y = df[[country]]
@@ -105,3 +135,15 @@ country_iso_alpha3 = {
     'Zambia': 'ZMB',
     'Zimbabwe': 'ZWE'
 }
+
+
+def es_model(data, country, step):
+    
+    
+    es_model = ExponentialSmoothing(trend=ModelMode.ADDITIVE, seasonal=None)
+    es_model.fit(data[country])
+
+    es_pred = es_model.predict(step)
+
+    return data[country], es_pred
+
