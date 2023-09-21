@@ -59,9 +59,9 @@ plt.legend(labelcolor = "white")
 
 
 
-fig.update_layout(
-    xaxis_title="Year", yaxis_title="New HIV Population"
-)
+# fig.update_layout(
+#     xaxis_title="Year", yaxis_title="New HIV Population"
+# )
 with r:
     rl,rr = st.columns(2)
 rl.plotly_chart(interactive_fig,use_container_width=True)
