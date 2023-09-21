@@ -33,7 +33,19 @@ fit_df,pred_df = utils.predict(df,country_name,input_years-2022)
 plot_df = utils.combine(df[[country_name]],fit_df,pred_df).rename(columns={country_name:"New HIV Population"})
 
 #Exponential Smoothing
+data = pd.read_csv('Cleaned HIV Data.csv')
+series_aids = TimeSeries.from_dataframe(data,
+                                    time_col="Time"
+                                    )
 
+series, prediction = utils.es_model(series_aids, country_name, input_years-2022)
+
+interactive_fig = plt.figure()
+series.plot()
+prediction.plot(label='forecast')
+
+plt.legend()
+st.pyplot(interactive_fig)
 
 
 fig = px.line(
@@ -53,7 +65,7 @@ fig.update_layout(
 )
 with r:
     rl,rr = st.columns(2)
-rl.plotly_chart(fig,use_container_width=True)
+rl.plotly_chart(interactive_fig,use_container_width=True)
 show_df = pred_df.copy().reset_index().rename(columns={"index":"Year",country_name:"New HIV Population"})
 show_df["Year"] = show_df["Year"].astype("object")
 show_df["New HIV Population"] = show_df["New HIV Population"].astype("int")
@@ -107,28 +119,4 @@ fig0 = px.line(
 
 )
 
-data = pd.read_csv('Cleaned HIV Data.csv')
-series_aids = TimeSeries.from_dataframe(data,
-                                    time_col="Time"
-                                    )
 
-series, prediction = utils.es_model(series_aids, country_name, input_years-2022)
-
-interactive_fig = plt.figure()
-series.plot()
-
-    # st.subheader("Training Controls")
-    # num_periods = st.slider("Number of validation months", min_value=2, max_value=len(series) - 24, value=36, help='How many months worth of datapoints to exclude from training')
-    # num_samples = st.number_input("Number of prediction samples", min_value=1, max_value=10000, value=1000, help="Number of times a prediction is sampled for a probabilistic model")
-    # st.subheader("Plotting Controls")
-    # low_quantile = st.slider('Lower Percentile', min_value=0.01, max_value=0.99, value=0.05, help='The quantile to use for the lower bound of the plotted confidence interval.')
-    # high_quantile = st.slider('High Percentile', min_value=0.01, max_value=0.99, value=0.95, help='The quantile to use for the upper bound of the plotted confidence interval.')
-    
-    # train, val = series[:-num_periods], series[-num_periods:]
-    # model = ExponentialSmoothing()
-    # model.fit(train)
-    # prediction = model.predict(len(val), num_samples=num_samples)
-prediction.plot(label='forecast')
-
-plt.legend()
-st.pyplot(interactive_fig)
