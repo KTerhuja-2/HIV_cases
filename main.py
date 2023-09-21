@@ -72,8 +72,8 @@ l.write(f"Forecast Upto year {input_years}")
 l.dataframe(prediction.pd_dataframe().astype("int").style.format(thousands=''),use_container_width=True)
 
 
-map_df = pd.read_csv("HIV_data 1990-2032.csv",index_col=0).dropna(axis=1)
-map_df = map_df[sorted(set(country_list).intersection(df.columns))].transpose()[[input_years]].astype("int").copy()
+map_df = pd.read_csv("Forecasted HIV upto 2032.csv")
+# map_df = map_df[sorted(set(country_list).intersection(df.columns))].transpose()[[input_years]].astype("int").copy()
 map_df["ISO"] = utils.country_iso_alpha3
 fig2 = px.choropleth(
     map_df, 
