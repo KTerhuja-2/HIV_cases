@@ -69,7 +69,7 @@ show_df = pred_df.copy().reset_index().rename(columns={"index":"Year",country_na
 show_df["Year"] = show_df["Year"].astype("object")
 show_df["New HIV Population"] = show_df["New HIV Population"].astype("int")
 l.write(f"Forecast Upto year {input_years}")
-l.dataframe(prediction.pd_dataframe().style.format(thousands=''),use_container_width=True)
+l.dataframe(prediction.pd_dataframe().astype("int").style.format(thousands=''),use_container_width=True)
 
 
 map_df = pd.read_csv("HIV_data 1990-2032.csv",index_col=0).dropna(axis=1)
