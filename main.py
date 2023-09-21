@@ -73,12 +73,12 @@ l.dataframe(prediction.pd_dataframe().astype("int").style.format(thousands=''),u
 
 
 map_df = pd.read_csv("Forecasted HIV upto 2032.csv")
-map_df = map_df.transpose()[[str(pd.to_datetime(str(2020)))]].copy()
+map_df = map_df.transpose()[[str(pd.to_datetime(str(input_years)))]].copy()
 map_df["ISO"] = utils.country_iso_alpha3
 fig2 = px.choropleth(
     map_df, 
     locations="ISO",
-    color=input_years,
+    color=str(pd.to_datetime(str(input_years))),
     hover_name=map_df.index,
     color_continuous_scale=px.colors.sequential.YlOrRd,
     # color_continuous_scale=px.colors.diverging.balance,
