@@ -47,21 +47,21 @@ prediction.plot(label='forecast', color = 'red')
 plt.legend(labelcolor = "white")
 
 
-# fig = px.line(
-#     plot_df,
-#     x=plot_df.index,
-#     y="New HIV Population",
-#     color="Tag",
-#     title=f"New HIV Population in {country_name}",
-#     color_discrete_sequence=["dodgerblue","mediumspringgreen","crimson"],
-#     height=600
-#     )
+fig = px.line(
+    plot_df,
+    x=plot_df.index,
+    y="New HIV Population",
+    color="Tag",
+    title=f"New HIV Population in {country_name}",
+    color_discrete_sequence=["dodgerblue","mediumspringgreen","crimson"],
+    height=600
+    )
 
 
 
-# fig.update_layout(
-#     xaxis_title="Year", yaxis_title="New HIV Population"
-# )
+fig.update_layout(
+    xaxis_title="Year", yaxis_title="New HIV Population"
+)
 with r:
     rl,rr = st.columns(2)
 rl.plotly_chart(interactive_fig,use_container_width=True)
