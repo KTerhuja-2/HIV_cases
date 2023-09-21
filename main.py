@@ -41,21 +41,21 @@ series_aids = TimeSeries.from_dataframe(data,
 series, prediction = utils.es_model(series_aids, country_name, input_years-2022)
 
 interactive_fig = plt.figure()
-series.plot(label= country_name)
-prediction.plot(label='forecast')
+series.plot(label= country_name, color = 'green')
+prediction.plot(label='forecast', color = 'red')
 
-plt.legend()
+plt.legend(labelcolor = "white")
 
 
-fig = px.line(
-    plot_df,
-    x=plot_df.index,
-    y="New HIV Population",
-    color="Tag",
-    title=f"New HIV Population in {country_name}",
-    color_discrete_sequence=["dodgerblue","mediumspringgreen","crimson"],
-    height=600
-    )
+# fig = px.line(
+#     plot_df,
+#     x=plot_df.index,
+#     y="New HIV Population",
+#     color="Tag",
+#     title=f"New HIV Population in {country_name}",
+#     color_discrete_sequence=["dodgerblue","mediumspringgreen","crimson"],
+#     height=600
+#     )
 
 
 
