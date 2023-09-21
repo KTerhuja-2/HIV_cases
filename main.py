@@ -41,8 +41,8 @@ series_aids = TimeSeries.from_dataframe(data,
 series, prediction = utils.es_model(series_aids, country_name, input_years-2022)
 
 interactive_fig = plt.figure()
-series.plot(label= country_name, color = 'green')
-prediction.plot(label='forecast', color = 'red')
+series.plot(label= f"New HIV cases in {country_name}", color = 'green')
+prediction.plot(label=f"forecasted New HIV Cases in {country_name}", color = 'red')
 
 plt.legend(labelcolor = "white")
 
@@ -69,7 +69,7 @@ show_df = pred_df.copy().reset_index().rename(columns={"index":"Year",country_na
 show_df["Year"] = show_df["Year"].astype("object")
 show_df["New HIV Population"] = show_df["New HIV Population"].astype("int")
 l.write(f"Forecast Upto year {input_years}")
-l.dataframe(show_df.style.format(thousands=''),use_container_width=True)
+l.dataframe(prediction.pd_dataframe().style.format(thousands=''),use_container_width=True)
 
 
 map_df = pd.read_csv("HIV_data 1990-2032.csv",index_col=0).dropna(axis=1)
