@@ -64,7 +64,7 @@ fig.update_layout(
 )
 with r:
     rl,rr = st.columns(2)
-rl.plotly_chart(fig,use_container_width=True)
+rl.plotly_chart(interactive_fig,use_container_width=True)
 show_df = pred_df.copy().reset_index().rename(columns={"index":"Year",country_name:"New HIV Population"})
 show_df["Year"] = show_df["Year"].astype("object")
 show_df["New HIV Population"] = show_df["New HIV Population"].astype("int")
