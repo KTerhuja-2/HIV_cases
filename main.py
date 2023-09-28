@@ -108,7 +108,7 @@ interactive_fig = px.line(
 interactive_fig.update_layout(
     title="Plot Title",
     xaxis_title="Year",
-    yaxis_title="New Cases",
+    yaxis_title="New HIV Population",
     legend_title=" ",
     legend_orientation="h",
     legend_y=-0.1,
