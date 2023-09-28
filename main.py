@@ -9,6 +9,17 @@ from darts import TimeSeries
 
 
 st.set_page_config(page_title="HIV POC",page_icon="🎗️",layout="wide")
+hide = """
+<style>
+MainMenu {visibility:hidden;}
+header {visibility:hidden;}
+footer {visibility:hidden;}
+</style>
+"""
+st.markdown(hide, unsafe_allow_html=True)
+st.write(
+    "<style>div.block-container{padding-top:0rem;}</style>", unsafe_allow_html=True
+)
 st.markdown("#### New HIV Cases Forecast in Africa")
 
 df = pd.read_csv("HIV_data 1990-2022.csv",index_col=0).dropna(axis=1)
@@ -40,28 +51,73 @@ series_aids = TimeSeries.from_dataframe(data,
 
 series, prediction = utils.es_model(series_aids, country_name, input_years-2022)
 
-interactive_fig = plt.figure()
-series.plot(label= f"New HIV cases in {country_name}", color = 'green')
-prediction.plot(label=f"forecasted New HIV Cases in {country_name}", color = 'red')
+# interactive_fig = plt.figure()
+# series.plot(label= f"New HIV cases in {country_name}", color = 'green')
+# prediction.plot(label=f"forecasted New HIV Cases in {country_name}", color = 'red')
 
-plt.legend(labelcolor = "white")
+# plt.legend(labelcolor = "white")
 
 
-fig = px.line(
-    plot_df,
-    x=plot_df.index,
-    y="New HIV Population",
-    color="Tag",
-    title=f"New HIV Population in {country_name}",
-    color_discrete_sequence=["dodgerblue","mediumspringgreen","crimson"],
-    height=600
+# fig = px.line(
+#     plot_df,
+#     x=plot_df.index,
+#     y="New HIV Population",
+#     color="Tag",
+#     title=f"New HIV Population in {country_name}",
+#     color_discrete_sequence=["dodgerblue","mediumspringgreen","crimson"],
+#     height=600
+#     )
+
+
+
+# fig.update_layout(
+#     xaxis_title="Year", yaxis_title="New HIV Population"
+# )
+
+actual_df =  series.pd_dataframe()
+forecast_df = actual_df.tail(1).copy()
+forecast_df = pd.concat([forecast_df,prediction.pd_dataframe()],axis=0)
+
+forecast_df = (
+    pd.concat(
+        [
+            forecast_df,
+            actual_df,
+        ],
+        axis=1,
     )
-
-
-
-fig.update_layout(
-    xaxis_title="Year", yaxis_title="New HIV Population"
+    .set_axis(
+        [
+            f"New HIV cases in {country_name}",
+            f"Forecasted New HIV Cases in {country_name}",
+        ],
+        axis=1,
+    )
+    .reset_index()
 )
+interactive_fig = px.line(
+    forecast_df,
+    x="Time",
+    y=[
+        f"New HIV cases in {country_name}",
+        f"Forecasted New HIV Cases in {country_name}",
+    ],
+    color_discrete_sequence=["crimson","mediumseagreen"],
+    markers=True,
+)
+interactive_fig.update_layout(
+    title="Plot Title",
+    xaxis_title="Year",
+    yaxis_title="New Cases",
+    legend_title=" ",
+    legend_orientation="h",
+    legend_y=-0.1,
+    legend_xanchor="center",
+    legend_x=0.5,
+    legend_traceorder="reversed",
+)
+
+
 with r:
     rl,rr = st.columns(2)
 rl.plotly_chart(interactive_fig,use_container_width=True)
