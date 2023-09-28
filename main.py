@@ -36,12 +36,13 @@ country_list = [
 
 
 l,r = st.columns([1,4])
-country_name = l.selectbox("Country",sorted(set(country_list).intersection(df.columns)))
+countries = sorted(set(country_list).intersection(df.columns))
+country_name = l.selectbox("Country",countries,index=countries.index("South Africa"))
 input_years = r.select_slider("Forecast Upto Year",[2023+i for i in range(10)])
 
 #Linear Regression
 fit_df,pred_df = utils.predict(df,country_name,input_years-2022)
-plot_df = utils.combine(df[[country_name]],fit_df,pred_df).rename(columns={country_name:"New HIV Population"})
+# plot_df = utils.combine(df[[country_name]],fit_df,pred_df).rename(columns={country_name:"New HIV Population"})
 
 #Exponential Smoothing
 data = pd.read_csv('Cleaned HIV Data.csv')
