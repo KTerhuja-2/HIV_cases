@@ -107,7 +107,7 @@ interactive_fig = px.line(
     markers=True,
 )
 interactive_fig.update_layout(
-    title=f"New HIV Cases from 2010 - {input_years}",
+    title=f"New HIV Cases from 1990 - {input_years}",
     xaxis_title="Year",
     yaxis_title="New HIV Population",
     legend_title=" ",
