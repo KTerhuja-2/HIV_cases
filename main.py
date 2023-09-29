@@ -115,7 +115,7 @@ interactive_fig.update_layout(
     legend_y=-0.1,
     legend_xanchor="center",
     legend_x=0.5,
-    # legend_traceorder="reversed",
+    legend_traceorder="reversed",
 )
 
 
