@@ -89,8 +89,8 @@ forecast_df = (
     )
     .set_axis(
         [
-            f"New HIV cases in {country_name}",
             f"Forecasted New HIV Cases in {country_name}",
+            f"New HIV cases in {country_name}",
         ],
         axis=1,
     )
@@ -100,8 +100,8 @@ interactive_fig = px.line(
     forecast_df,
     x="Time",
     y=[
-        f"New HIV cases in {country_name}",
         f"Forecasted New HIV Cases in {country_name}",
+        f"New HIV cases in {country_name}",
     ],
     color_discrete_sequence=["crimson","mediumseagreen"],
     markers=True,
