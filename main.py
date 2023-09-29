@@ -103,7 +103,7 @@ interactive_fig = px.line(
         f"New HIV cases in {country_name}",
         f"Forecasted New HIV Cases in {country_name}",
     ],
-    color_discrete_sequence=["mediumseagreen","crimson"],
+    color_discrete_sequence=["crimson","mediumseagreen"],
     markers=True,
 )
 interactive_fig.update_layout(
@@ -115,7 +115,7 @@ interactive_fig.update_layout(
     legend_y=-0.1,
     legend_xanchor="center",
     legend_x=0.5,
-    legend_traceorder="reversed",
+    # legend_traceorder="reversed",
 )
 
 
