@@ -103,7 +103,7 @@ interactive_fig = px.line(
         f"New HIV cases in {country_name}",
         f"Forecasted New HIV Cases in {country_name}",
     ],
-    color_discrete_sequence=["crimson","mediumseagreen"],
+    color_discrete_sequence=["mediumseagreen","crimson"],
     markers=True,
 )
 interactive_fig.update_layout(
